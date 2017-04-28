@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">EnlightenMe</string>
     <string name="action_settings">Settings</string>
+
+    <string name="api_client_id">0b0da7db295b1294e9c9</string>
+    <string name="api_client_secret">0b0da7db295b1294e9c9</string>
 </resources>
