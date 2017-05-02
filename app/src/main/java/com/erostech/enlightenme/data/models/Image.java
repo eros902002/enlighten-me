@@ -80,7 +80,7 @@ public class Image implements Parcelable {
 
     @SerializedName("assets")
     @Expose
-    private List<ImageAssets> assets;
+    private ImageAssets assets;
 
     @SerializedName("models")
     @Expose
@@ -121,8 +121,7 @@ public class Image implements Parcelable {
         keywords = new ArrayList<>();
         in.readStringList(keywords);
 
-        assets = new ArrayList<>();
-        in.readList(assets, ImageAssets.class.getClassLoader());
+        assets = in.readParcelable(ImageAssets.class.getClassLoader());
 
         models = new ArrayList<>();
         in.readList(models, Model.class.getClassLoader());
@@ -147,7 +146,7 @@ public class Image implements Parcelable {
         dest.writeList(modelReleases);
         dest.writeList(categories);
         dest.writeList(keywords);
-        dest.writeList(assets);
+        dest.writeParcelable(assets, flags);
         dest.writeList(models);
     }
 
@@ -290,19 +289,19 @@ public class Image implements Parcelable {
         this.keywords = keywords;
     }
 
-    public List<ImageAssets> getAssets() {
-        return assets;
-    }
-
-    public void setAssets(List<ImageAssets> assets) {
-        this.assets = assets;
-    }
-
     public List<Model> getModels() {
         return models;
     }
 
     public void setModels(List<Model> models) {
         this.models = models;
+    }
+
+    public ImageAssets getAssets() {
+        return assets;
+    }
+
+    public void setAssets(ImageAssets assets) {
+        this.assets = assets;
     }
 }

@@ -109,4 +109,100 @@ public class ImageAssets implements Parcelable {
             return new ImageAssets[size];
         }
     };
+
+    public ImageSizeDetails getSmallJPG() {
+        return smallJPG;
+    }
+
+    public void setSmallJPG(ImageSizeDetails smallJPG) {
+        this.smallJPG = smallJPG;
+    }
+
+    public ImageSizeDetails getMediumJPG() {
+        return mediumJPG;
+    }
+
+    public void setMediumJPG(ImageSizeDetails mediumJPG) {
+        this.mediumJPG = mediumJPG;
+    }
+
+    public ImageSizeDetails getHugeJPG() {
+        return hugeJPG;
+    }
+
+    public void setHugeJPG(ImageSizeDetails hugeJPG) {
+        this.hugeJPG = hugeJPG;
+    }
+
+    public ImageSizeDetails getSupersizeJPG() {
+        return supersizeJPG;
+    }
+
+    public void setSupersizeJPG(ImageSizeDetails supersizeJPG) {
+        this.supersizeJPG = supersizeJPG;
+    }
+
+    public ImageSizeDetails getHugeTIFF() {
+        return hugeTIFF;
+    }
+
+    public void setHugeTIFF(ImageSizeDetails hugeTIFF) {
+        this.hugeTIFF = hugeTIFF;
+    }
+
+    public ImageSizeDetails getSupersizeTIFF() {
+        return supersizeTIFF;
+    }
+
+    public void setSupersizeTIFF(ImageSizeDetails supersizeTIFF) {
+        this.supersizeTIFF = supersizeTIFF;
+    }
+
+    public ImageSizeDetails getVectorEPS() {
+        return vectorEPS;
+    }
+
+    public void setVectorEPS(ImageSizeDetails vectorEPS) {
+        this.vectorEPS = vectorEPS;
+    }
+
+    public Thumbnail getSmallThumbnail() {
+        return smallThumbnail;
+    }
+
+    public void setSmallThumbnail(Thumbnail smallThumbnail) {
+        this.smallThumbnail = smallThumbnail;
+    }
+
+    public Thumbnail getLargeThumbnail() {
+        return largeThumbnail;
+    }
+
+    public void setLargeThumbnail(Thumbnail largeThumbnail) {
+        this.largeThumbnail = largeThumbnail;
+    }
+
+    public Thumbnail getPreview() {
+        return preview;
+    }
+
+    public void setPreview(Thumbnail preview) {
+        this.preview = preview;
+    }
+
+    public Thumbnail getPreview1000() {
+        return preview1000;
+    }
+
+    public void setPreview1000(Thumbnail preview1000) {
+        this.preview1000 = preview1000;
+    }
+
+    public Thumbnail getPreview1500() {
+        return preview1500;
+    }
+
+    public void setPreview1500(Thumbnail preview1500) {
+        this.preview1500 = preview1500;
+    }
 }
