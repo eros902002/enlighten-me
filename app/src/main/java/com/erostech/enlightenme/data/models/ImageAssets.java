@@ -69,12 +69,34 @@ public class ImageAssets implements Parcelable {
     }
 
     private ImageAssets(Parcel in) {
-
+        smallJPG = in.readParcelable(ImageSizeDetails.class.getClassLoader());
+        mediumJPG = in.readParcelable(ImageSizeDetails.class.getClassLoader());
+        hugeJPG = in.readParcelable(ImageSizeDetails.class.getClassLoader());
+        supersizeJPG = in.readParcelable(ImageSizeDetails.class.getClassLoader());
+        hugeTIFF = in.readParcelable(ImageSizeDetails.class.getClassLoader());
+        supersizeTIFF = in.readParcelable(ImageSizeDetails.class.getClassLoader());
+        vectorEPS = in.readParcelable(ImageSizeDetails.class.getClassLoader());
+        smallThumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
+        largeThumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
+        preview = in.readParcelable(Thumbnail.class.getClassLoader());
+        preview1000 = in.readParcelable(Thumbnail.class.getClassLoader());
+        preview1500 = in.readParcelable(Thumbnail.class.getClassLoader());
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeParcelable(smallJPG, flags);
+        dest.writeParcelable(mediumJPG, flags);
+        dest.writeParcelable(hugeJPG, flags);
+        dest.writeParcelable(supersizeJPG, flags);
+        dest.writeParcelable(hugeTIFF, flags);
+        dest.writeParcelable(supersizeTIFF, flags);
+        dest.writeParcelable(vectorEPS, flags);
+        dest.writeParcelable(smallThumbnail, flags);
+        dest.writeParcelable(largeThumbnail, flags);
+        dest.writeParcelable(preview, flags);
+        dest.writeParcelable(preview1000, flags);
+        dest.writeParcelable(preview1500, flags);
     }
 
     public static final Parcelable.Creator<ImageAssets> CREATOR
