@@ -10,6 +10,8 @@ public class Config {
     private static final String API_CLIENT_SECRET = "a0e152bac41ad8ba9210ba3f3234c8152f1f19c2";
     private static final String DEFAULT_LANGUAGE = "en";
 
+    private static final int PAGE_SIZE = 20;
+
     public static String getApiUrl() {
         return BASE_API_URL;
     }
@@ -24,5 +26,9 @@ public class Config {
 
     public static String getDefaultLanguage() {
         return DEFAULT_LANGUAGE;
+    }
+
+    public static int getPageSize() {
+        return PAGE_SIZE;
     }
 }
