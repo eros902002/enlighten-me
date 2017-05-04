@@ -26,7 +26,6 @@ public class ImageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private static final int LOADING = 1;
 
     private List<Image> mImages;
-    private int totalPages;
 
     private boolean isLoadingAdded = false;
     private boolean retryPageLoad = false;
@@ -46,7 +45,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         switch (viewType) {
             case ITEM:
-                getViewHolder(parent, inflater);
+                viewHolder = getViewHolder(parent, inflater);
                 break;
             case LOADING:
                 View view = inflater.inflate(R.layout.item_progress_list, parent, false);

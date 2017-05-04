@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,7 +37,7 @@ import javax.inject.Inject;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainListingFragment extends Fragment implements MainListingContract.View, ImageListAdapterCallback {
+public class MainListingFragment extends Fragment implements MainListingContract.View, ImageListAdapterCallback, SwipeRefreshLayout.OnRefreshListener {
 
     private static final int STARTING_PAGE = 1;
     private static final int INITIAL_TOTAL_PAGES = 5;
@@ -46,11 +47,12 @@ public class MainListingFragment extends Fragment implements MainListingContract
     private LinearLayout mErrorLayout;
     private Button mRetryButton;
     private TextView mErrorText;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private ImageListAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
 
-    private String query = "";
+    private String query = "doge";
 
     private boolean isLoading = false;
     private boolean isLastPage = false;
@@ -81,6 +83,7 @@ public class MainListingFragment extends Fragment implements MainListingContract
         mErrorLayout = (LinearLayout) view.findViewById(R.id.error_layout);
         mRetryButton = (Button) view.findViewById(R.id.error_btn_retry);
         mErrorText = (TextView) view.findViewById(R.id.error_txt_cause);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh);
 
         DaggerMainListingComponent.builder()
                 .appComponent(((App) getActivity().getApplicationContext()).getAppComponent())
@@ -130,6 +133,10 @@ public class MainListingFragment extends Fragment implements MainListingContract
                 loadFirstPage();
             }
         });
+
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+
+        loadFirstPage();
     }
 
     @Override
@@ -150,7 +157,6 @@ public class MainListingFragment extends Fragment implements MainListingContract
         if (totalImages % Config.getPageSize() > 0) {
             totalPages++;
         }
-
     }
 
     @Override
@@ -225,5 +231,10 @@ public class MainListingFragment extends Fragment implements MainListingContract
     private boolean isNetworkConnected() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         return connectivityManager.getActiveNetworkInfo() != null;
+    }
+
+    @Override
+    public void onRefresh() {
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 }

@@ -13,4 +13,6 @@
 
     <dimen name="search_icon_padding">12dp</dimen>
     <dimen name="search_view_text_padding">65dp</dimen>
+
+    <dimen name="list_item_layout_height">80dp</dimen>
 </resources>
