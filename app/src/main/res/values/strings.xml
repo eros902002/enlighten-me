@@ -13,6 +13,9 @@
 
     <string name="search_hint">Search</string>
 
-    <string name="api_client_id" translatable="false" >0b0da7db295b1294e9c9</string>
-    <string name="api_client_secret" translatable="false" >a0e152bac41ad8ba9210ba3f3234c8152f1f19c2</string>
+    <string name="api_client_id" translatable="false">0b0da7db295b1294e9c9</string>
+    <string name="api_client_secret" translatable="false">a0e152bac41ad8ba9210ba3f3234c8152f1f19c2</string>
+    <string name="title_activity_image_detail">ImageDetailActivity</string>
+
+    <string name="image_detail_transition" translatable="false">image_detail_transition</string>
 </resources>

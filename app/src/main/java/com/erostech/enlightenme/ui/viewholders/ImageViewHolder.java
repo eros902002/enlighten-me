@@ -38,6 +38,6 @@ public class ImageViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
     @Override
     public void onClick(View v) {
-
+        
     }
 }
