@@ -134,7 +134,7 @@ public class Image implements Parcelable {
         dest.writeString(addedDate);
         dest.writeString(mediaType);
         dest.writeParcelable(contributor, flags);
-        dest.writeDouble(aspect.doubleValue());
+        dest.writeDouble( aspect != null ? aspect.doubleValue() : 0);
         dest.writeString(imageType);
         dest.writeByte((byte) (isEditorial ? 1 : 0));
         dest.writeByte((byte) (isAdult ? 1 : 0));

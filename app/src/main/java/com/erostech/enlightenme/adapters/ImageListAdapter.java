@@ -2,6 +2,7 @@ package com.erostech.enlightenme.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.erostech.enlightenme.R;
 import com.erostech.enlightenme.callbacks.ImageListAdapterCallback;
 import com.erostech.enlightenme.callbacks.LoadingViewHolderCallback;
 import com.erostech.enlightenme.data.models.Image;
+import com.erostech.enlightenme.listeners.ImageItemClickListener;
 import com.erostech.enlightenme.ui.viewholders.ImageViewHolder;
 import com.erostech.enlightenme.ui.viewholders.LoadingViewHolder;
 
@@ -25,6 +27,8 @@ public class ImageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private static final int ITEM = 0;
     private static final int LOADING = 1;
 
+    private final ImageItemClickListener mItemClickListener;
+
     private List<Image> mImages;
 
     private boolean isLoadingAdded = false;
@@ -33,8 +37,9 @@ public class ImageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private ImageListAdapterCallback mCallback;
     private String errorMessage;
 
-    public ImageListAdapter(ImageListAdapterCallback callback) {
+    public ImageListAdapter(ImageListAdapterCallback callback, ImageItemClickListener itemClickListener) {
         this.mCallback = callback;
+        this.mItemClickListener = itemClickListener;
         this.mImages = new ArrayList<>();
     }
 
@@ -69,12 +74,23 @@ public class ImageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         switch (getItemViewType(position)) {
             case ITEM:
-                ((ImageViewHolder) holder).bind(image);
+                bindImageHolder((ImageViewHolder) holder, image);
                 break;
             case LOADING:
                 ((LoadingViewHolder) holder).bind(mCallback, this, retryPageLoad, errorMessage);
                 break;
         }
+    }
+
+    private void bindImageHolder(final ImageViewHolder holder, final Image image) {
+        holder.bind(image);
+        ViewCompat.setTransitionName(holder.mImageView, image.getId());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mItemClickListener.onImageItemClick(holder.getAdapterPosition(), image, holder.mImageView);
+            }
+        });
     }
 
     @Override
@@ -115,6 +131,10 @@ public class ImageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public Image getItem(int position) {
         return mImages.get(position);
+    }
+
+    public ArrayList<Image> getItems() {
+        return (ArrayList<Image>) mImages;
     }
 
     public boolean isEmpty() {

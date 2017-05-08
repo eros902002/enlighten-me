@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -23,7 +24,9 @@ import com.erostech.enlightenme.adapters.ImageListAdapter;
 import com.erostech.enlightenme.callbacks.ImageListAdapterCallback;
 import com.erostech.enlightenme.config.Config;
 import com.erostech.enlightenme.data.models.Image;
+import com.erostech.enlightenme.listeners.ImageItemClickListener;
 import com.erostech.enlightenme.listeners.PaginationScrollListener;
+import com.erostech.enlightenme.ui.activities.ImageDetailActivity;
 import com.erostech.enlightenme.ui.components.DaggerMainListingComponent;
 import com.erostech.enlightenme.ui.contracts.MainListingContract;
 import com.erostech.enlightenme.ui.modules.MainListingModule;
@@ -37,7 +40,7 @@ import javax.inject.Inject;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainListingFragment extends Fragment implements MainListingContract.View, ImageListAdapterCallback, SwipeRefreshLayout.OnRefreshListener {
+public class MainListingFragment extends Fragment implements MainListingContract.View, ImageListAdapterCallback, SwipeRefreshLayout.OnRefreshListener, ImageItemClickListener {
 
     private static final int STARTING_PAGE = 1;
     private static final int INITIAL_TOTAL_PAGES = 5;
@@ -101,7 +104,7 @@ public class MainListingFragment extends Fragment implements MainListingContract
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        mAdapter = new ImageListAdapter(this);
+        mAdapter = new ImageListAdapter(this, this);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new PaginationScrollListener(mLayoutManager) {
             @Override
@@ -144,6 +147,7 @@ public class MainListingFragment extends Fragment implements MainListingContract
         hideErrorView();
 
         mProgressBar.setVisibility(View.GONE);
+        mSwipeRefreshLayout.setRefreshing(false);
 
         mAdapter.addAll(images);
 
@@ -235,6 +239,11 @@ public class MainListingFragment extends Fragment implements MainListingContract
 
     @Override
     public void onRefresh() {
-        mSwipeRefreshLayout.setRefreshing(false);
+        mPresenter.loadInitialPage(query);
+    }
+
+    @Override
+    public void onImageItemClick(int position, Image image, ImageView imageView) {
+        ImageDetailActivity.start(getActivity(), mAdapter.getItems(), position);
     }
 }

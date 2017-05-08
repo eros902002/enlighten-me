@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.erostech.enlightenme.R;
+import com.erostech.enlightenme.ui.fragments.MainListingFragment;
 import com.erostech.enlightenme.ui.views.CustomSearchView;
 
 import java.util.ArrayList;
@@ -29,6 +30,9 @@ public class MainListingActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.fragment_container, MainListingFragment.newInstance())
+                .commit();
     }
 }

@@ -7,16 +7,16 @@ import android.widget.TextView;
 
 import com.erostech.enlightenme.R;
 import com.erostech.enlightenme.data.models.Image;
+import com.erostech.enlightenme.ui.activities.ImageDetailActivity;
 import com.squareup.picasso.Picasso;
 
 /**
  * Created by erosgarciaponte on 02/05/2017.
  */
 
-public class ImageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    private TextView mDescriptionView;
-    private ImageView mImageView;
-    private Image mImage;
+public class ImageViewHolder extends RecyclerView.ViewHolder {
+    public TextView mDescriptionView;
+    public ImageView mImageView;
 
     public ImageViewHolder(View itemView) {
         super(itemView);
@@ -25,19 +25,13 @@ public class ImageViewHolder extends RecyclerView.ViewHolder implements View.OnC
     }
 
     public void bind(Image image) {
-        mImage = image;
-        if (mImage != null) {
-            mDescriptionView.setText(mImage.getDescription());
+        if (image != null) {
+            mDescriptionView.setText(image.getDescription());
             Picasso.with(itemView.getContext())
-                    .load(mImage.getAssets().getPreview().getUrl())
+                    .load(image.getAssets().getPreview().getUrl())
                     .resizeDimen(R.dimen.poster_thumb_size, R.dimen.poster_thumb_size)
                     .centerCrop()
                     .into(mImageView);
         }
-    }
-
-    @Override
-    public void onClick(View v) {
-        
     }
 }
